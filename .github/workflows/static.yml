@@ -1,0 +1,46 @@
+# 静的コンテンツをGitHub Pagesに高速にデプロイするためのワークフロー
+name: Deploy static content to Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同じグループのジョブが実行中なら、新しい方を優先して古い方をキャンセルする
+# これで無駄な待ち時間をカットできるよ！
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # 履歴を全部追わずに最新だけ取得（シャロークローン）して高速化
+          fetch-depth: 1
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # ここを '.' ではなく 'public' や 'dist' など、
+          # 実際に公開したいフォルダ名にするとアップロードが爆速になるよ！
+          # もしルート直下のファイルをそのまま出すなら '.' のままでもOK。
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
