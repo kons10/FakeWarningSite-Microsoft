@@ -1,4 +1,4 @@
-**FakeWarningSite-Microsoft** リポジトリのコードを、GitHub本ページ・全rawファイル・ライブデモページ（https://kons10.github.io/FakeWarningSite-Microsoft/）まで**完全に解析**した結果を、長めに詳しく報告するね。
+**FakeWarningSite-Microsoft** リポジトリのコードを、GitHub本ページ・全rawファイル・[ライブデモページ]（https://kons10.github.io/FakeWarningSite-Microsoft/）まで**完全に解析**した結果を、長めに詳しく報告するね。
 
 ### まず結論（君の勘はかなり当たってる）
 - **「ただのジョーク」では済まないレベルの完成度**で、**本物のTech Support Scam（電話詐欺）用の警告画面テンプレート**として作られている。
